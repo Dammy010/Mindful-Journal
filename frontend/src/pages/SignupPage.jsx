@@ -12,7 +12,7 @@ export default function SignupPage() {
   const navigate = useNavigate();
 
   const handleChange = (e) => {
-    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const handleSubmit = async (e) => {
@@ -37,75 +37,81 @@ export default function SignupPage() {
   };
 
   return (
-    <section className="max-w-md mx-auto mt-12 p-6 bg-white shadow-lg rounded-lg">
-      <h2 className="text-2xl font-bold text-center mb-6">Create an Account</h2>
+    <section className="max-w-md mx-auto mt-16 p-8 bg-white shadow-xl rounded-xl">
+      <h2 className="text-3xl font-bold text-center text-blue-900 mb-6">
+        Create Your Account
+      </h2>
 
       {error && (
-        <p className="text-red-500 text-sm mb-4 text-center">
+        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded mb-4 text-center">
           {error}
-        </p>
+        </div>
       )}
 
-      <form onSubmit={handleSubmit} className="space-y-4" noValidate>
-        <label className="block">
-          <span className="text-gray-700">Full Name</span>
+      <form onSubmit={handleSubmit} className="space-y-5">
+        <div>
+          <label className="block text-sm font-medium text-gray-700">Full Name</label>
           <input
             type="text"
             name="name"
             value={formData.name}
             onChange={handleChange}
-            placeholder="Your full name"
-            className="mt-1 block w-full p-3 border border-gray-300 rounded"
+            placeholder="John Doe"
+            className="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md focus:ring focus:ring-blue-300"
             required
           />
-        </label>
+        </div>
 
-        <label className="block">
-          <span className="text-gray-700">Email</span>
+        <div>
+          <label className="block text-sm font-medium text-gray-700">Email Address</label>
           <input
             type="email"
             name="email"
             value={formData.email}
             onChange={handleChange}
             placeholder="you@example.com"
-            className="mt-1 block w-full p-3 border border-gray-300 rounded"
+            className="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md focus:ring focus:ring-blue-300"
             required
           />
-        </label>
+        </div>
 
-        <label className="block relative">
-          <span className="text-gray-700">Password</span>
+        <div className="relative">
+          <label className="block text-sm font-medium text-gray-700">Password</label>
           <input
             type={showPassword ? 'text' : 'password'}
             name="password"
             value={formData.password}
             onChange={handleChange}
-            placeholder="Enter a secure password"
-            className="mt-1 block w-full p-3 border border-gray-300 rounded"
+            placeholder="••••••••"
+            className="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md focus:ring focus:ring-blue-300"
             required
           />
           <button
             type="button"
-            onClick={() => setShowPassword((prev) => !prev)}
-            className="absolute top-9 right-3 text-sm text-gray-600 focus:outline-none"
+            onClick={() => setShowPassword(prev => !prev)}
+            className="absolute top-10 right-3 text-sm text-gray-600"
           >
             {showPassword ? 'Hide' : 'Show'}
           </button>
-        </label>
+        </div>
 
         <button
           type="submit"
           disabled={loading}
-          className={`w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded transition duration-200 ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
+          className={`w-full text-white py-3 rounded-md font-semibold transition duration-200 ${
+            loading
+              ? 'bg-blue-400 cursor-not-allowed'
+              : 'bg-blue-600 hover:bg-blue-700'
+          }`}
         >
           {loading ? 'Creating Account...' : 'Sign Up'}
         </button>
       </form>
 
-      <p className="text-sm text-center mt-4 text-gray-600">
+      <p className="text-sm text-center mt-6 text-gray-600">
         Already have an account?{' '}
-        <Link to="/login" className="text-blue-600 hover:underline font-medium">
-          Log in here
+        <Link to="/login" className="text-blue-600 hover:underline font-semibold">
+          Log in
         </Link>
       </p>
     </section>
