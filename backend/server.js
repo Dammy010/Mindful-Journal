@@ -12,7 +12,7 @@ dotenv.config();
 const app = express();
 
 app.use(cors({
-  origin: 'https://mindful-journal-chi.vercel.app/', 
+  origin: 'https://mindful-journal-chi.vercel.app', 
   credentials: true,
 }));
 
@@ -32,6 +32,10 @@ app.use((err, req, res, next) => {
 app.use((err, req, res, next) => {
   console.error('Unexpected server error:', err);
   res.status(500).json({ message: 'Something went wrong' });
+});
+
+app.get("/", (req, res) => {
+  res.send("Mindful Journal backend is running ✅");
 });
 
 const PORT = process.env.PORT || 5000;
