@@ -1,13 +1,12 @@
 import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: 'http://localhost:4000/api',
+  baseURL: 'https://mindful-journal-bhaq.vercel.app/api',
   headers: {
     'Content-Type': 'application/json',
   },
 });
 
-// Attach Bearer token from localStorage to every request
 instance.interceptors.request.use((config) => {
   const token = localStorage.getItem('token');
   if (token) {
@@ -18,7 +17,6 @@ instance.interceptors.request.use((config) => {
   return Promise.reject(error);
 });
 
-// Optional: Global error logging
 instance.interceptors.response.use(
   response => response,
   error => {
